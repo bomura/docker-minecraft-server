@@ -2,7 +2,7 @@ version: '3'
 services:
   mincraft-server:
     container_name: minecraft-server
-    image: bomura/docker-minecraft-server
+    image: docker.io/bomura/docker-minecraft-server
     build: ./server
     ports:
       - 25565:25565
