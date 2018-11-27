@@ -2,11 +2,11 @@ version: '3'
 services:
   mincraft-server:
     container_name: minecraft-server
-    image: docker.io/bomura/docker-minecraft-server:1.13.1
+    image: docker.io/bomura/docker-minecraft-server:1.13.2
     build:
       context: ./server
       args:
-        - MC_SRV_VER=1.13.1
+        - MC_SRV_VER=1.13.2
     ports:
       - 25565:25565
     environment:
