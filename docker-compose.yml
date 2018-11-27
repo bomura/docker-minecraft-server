@@ -2,10 +2,19 @@ version: '3'
 services:
   mincraft-server:
     container_name: minecraft-server
-    image: docker.io/bomura/docker-minecraft-server
-    build: ./server
+    image: docker.io/bomura/docker-minecraft-server:1.13.1
+    build:
+      context: ./server
+      args:
+        - MC_SRV_VER=1.13.1
     ports:
       - 25565:25565
+    environment:
+      - EULA=
+      - OP_USER=
+      - _JAVA_OPTIONS="-Xmx1024M"
     volumes:
-      - ./minecraft-server:/minecraft-server
+      - world:/minecraft-server/world
     restart: unless-stopped
+volumes:
+  world:
