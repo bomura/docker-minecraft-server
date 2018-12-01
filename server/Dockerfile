@@ -5,15 +5,16 @@ WORKDIR /minecraft-server
 
 RUN apk add curl
 
-ARG MC_SRV_VER
+RUN curl -O https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer.jar \
+ && java -jar forge-1.12.2-14.23.5.2768-installer.jar nogui --installServer
 
-RUN MC_SRV_LATEST_VER=`curl -Lso- https://mcversions.net | grep -oE 'release latest" id="[0-9.]+' | grep -oE '[0-9.]+'` \
- && MC_SRV_URL=`curl -Lso- https://mcversions.net | grep -A3 -E "\"${MC_SRV_VER:=${MC_SRV_LATEST_VER}}\"" | grep -oE 'https.+server.jar'` \
- && curl -O ${MC_SRV_URL}
+RUN mkdir -p mods \
+ && curl -L -o ./mods/aether_ii-1.12.2-1.1.12.jar https://minecraft.curseforge.com/projects/the-aether-ii/files/2630226/download \
+ && curl -L -o ./mods/orbis_api-1.12.2-1.1.12a.jar https://minecraft.curseforge.com/projects/orbis-api/files/2631531/download
 
 COPY entrypoint-minecraft-server.sh /entrypoint-minecraft-server.sh
 
 EXPOSE 25565
 
 ENTRYPOINT ["/entrypoint-minecraft-server.sh"]
-CMD ["java", "-jar", "server.jar", "nogui"]
+CMD ["java", "-jar", "minecraft_server.1.12.2.jar", "nogui"]

@@ -1,20 +1,27 @@
 version: '3'
 services:
-  mincraft-server:
-    container_name: minecraft-server
-    image: docker.io/bomura/docker-minecraft-server
+  minecraft_server_aetherii_1.12.2:
+    container_name: minecraft_server_aetherii_1.12.2
+    image: docker.io/bomura/docker_minecraft_server:aetherii_1.12.2
     build:
       context: ./server
-      args:
-        - MC_SRV_VER=
     ports:
-      - 25565:25565
+      - 25566:25565
     environment:
       - EULA=
       - OP_USER=
       - _JAVA_OPTIONS="-Xmx1024M"
     volumes:
-      - world:/minecraft-server/world
+      - world-aetherii-1.12.2:/minecraft-server/world
+    restart: unless-stopped
+  minecraft_client_aetherii_1.12.2:
+    container_name: minecraft_client_aetherii_1.12.2
+    image: docker.io/bomura/docker_minecraft_client:aetherii_1.12.2
+    build:
+      context: ./client
+    volumes:
+      - ./client/forge:/minecraft-client/forge
+      - ./client/mods:/minecraft-client/mods
     restart: unless-stopped
 volumes:
-  world:
+  world-aetherii-1.12.2:
