@@ -1,3 +1,4 @@
-/minecraft-server/*
-!/minecraft-server/.gitkeep
-!/minecraft-server/server.jar
+/client/forge/*
+!/client/forge/.gitkeep
+/client/mods/*
+!/client/mods/.gitkeep
