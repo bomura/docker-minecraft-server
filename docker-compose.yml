@@ -2,7 +2,7 @@ version: '3'
 services:
   mincraft-server:
     container_name: minecraft-server
-    image: docker.io/bomura/docker-minecraft-server
+    image: docker.io/bomura/docker-minecraft-server:skyblock3
     build:
       context: ./server
       args:
@@ -14,7 +14,7 @@ services:
       - OP_USER=
       - _JAVA_OPTIONS="-Xmx1024M"
     volumes:
-      - world:/minecraft-server/world
+      - world-skyblock3:/minecraft-server/world
     restart: unless-stopped
 volumes:
-  world:
+  world-skyblock3:
